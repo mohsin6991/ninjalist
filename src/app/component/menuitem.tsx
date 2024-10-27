@@ -1,14 +1,16 @@
-// pages/menu.tsx  
-"use client";  
+// pages/menu/page.tsx
+"use client";
+
 import Image from 'next/image';
-import { FC, useState } from 'react';  
+import { FC, useState } from 'react';
 
 type MenuItemProps = {  
   name: string;  
   price: string;  
   description: string;  
   image: string;  
-};  
+  category: string;
+};
 
 const MenuItem: FC<MenuItemProps> = ({ name, price, description, image }) => (  
   <div className="bg-white shadow-md p-6 rounded-lg text-center transition-transform transform hover:scale-105 hover:shadow-lg border border-gray-200">  
@@ -19,7 +21,7 @@ const MenuItem: FC<MenuItemProps> = ({ name, price, description, image }) => (
   </div>  
 );  
 
-const allItems = [  
+const allItems: MenuItemProps[] = [  
   { name: "Bruschetta", price: "$8", description: "Grilled bread topped with fresh tomatoes and basil.", category: "Appetizers", image: "/images/f1.png" },  
   { name: "Stuffed Mushrooms", price: "$9", description: "Mushrooms stuffed with cheese and herbs.", category: "Appetizers", image: "/images/f2.png" },  
   { name: "Calamari", price: "$10", description: "Lightly breaded and fried to perfection.", category: "Appetizers", image: "/images/f3.png" },  
@@ -29,7 +31,7 @@ const allItems = [
   { name: "Vegetable Stir-Fry", price: "$14", description: "A mix of fresh vegetables with a savory sauce.", category: "Main Dishes", image: "/images/f7.png" },  
   { name: "Cheesecake", price: "$7", description: "Classic cheesecake with a graham cracker crust.", category: "Desserts", image: "/images/f8.png" },  
   { name: "Tiramisu", price: "$8", description: "Coffee-flavored dessert with layers of mascarpone.", category: "Desserts", image: "/images/f9.png" },  
-];  
+];
 
 const MenuSection: FC<{ items: MenuItemProps[] }> = ({ items }) => {  
   const [showAll, setShowAll] = useState(false);  
@@ -42,19 +44,28 @@ const MenuSection: FC<{ items: MenuItemProps[] }> = ({ items }) => {
           <MenuItem key={index} name={item.name} price={item.price} description={item.description} image={item.image} />  
         ))}  
       </div>  
-      {!showAll && items.length > 3 && (  
-        <div className="text-center mt-4">  
-          <button  
-            onClick={() => setShowAll(true)}  
-            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition duration-300"  
-          >  
-            View More  
-          </button>  
-        </div>  
-      )}  
+      {!showAll && items.length > 3 ? (
+        <div className="text-center mt-4">
+          <button
+            onClick={() => setShowAll(true)}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition duration-300"
+          >
+            View More
+          </button>
+        </div>
+      ) : (
+        <div className="text-center mt-4">
+          <button
+            onClick={() => setShowAll(false)}
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition duration-300"
+          >
+            View Less
+          </button>
+        </div>
+      )}
     </div>  
   );  
-};  
+};
 
 const MenuBody: FC = () => {  
   const [visibleSection, setVisibleSection] = useState<string>('all');  
@@ -68,7 +79,6 @@ const MenuBody: FC = () => {
       <main className="py-20">  
         <h2 className="text-5xl font-bold text-center text-gray-800 mb-12 tracking-wide">Our Menu</h2>  
 
-        {/* Navigation for Categories */}  
         <nav className="mb-8">  
           <ul className="flex justify-center space-x-4 md:space-x-6 lg:space-x-8">  
             {['all', 'appetizers', 'main-dishes', 'desserts', 'beverages'].map(category => (  
@@ -85,7 +95,6 @@ const MenuBody: FC = () => {
           </ul>  
         </nav>  
 
-        {/* Conditional Rendering of Menu Sections */}  
         {visibleSection === 'all' && <MenuSection items={allItems} />}  
         {visibleSection === 'appetizers' && <MenuSection items={allItems.filter(item => item.category === "Appetizers")} />}  
         {visibleSection === 'main-dishes' && <MenuSection items={allItems.filter(item => item.category === "Main Dishes")} />}  
@@ -94,6 +103,7 @@ const MenuBody: FC = () => {
       </main>  
     </div>  
   );  
-};  
+};
 
-export default MenuBody;
+// Export MenuBody as a named export
+export { MenuBody };
