@@ -31,6 +31,9 @@ const allItems: MenuItemProps[] = [
   { name: "Vegetable Stir-Fry", price: "$14", description: "A mix of fresh vegetables with a savory sauce.", category: "Main Dishes", image: "/images/f7.png" },  
   { name: "Cheesecake", price: "$7", description: "Classic cheesecake with a graham cracker crust.", category: "Desserts", image: "/images/f8.png" },  
   { name: "Tiramisu", price: "$8", description: "Coffee-flavored dessert with layers of mascarpone.", category: "Desserts", image: "/images/f9.png" },  
+  { name: "Lemonade", price: "$5", description: "Freshly squeezed lemonade.", category: "Beverages", image: "/images/bev1.png" },
+  { name: "Iced Coffee", price: "$4", description: "Chilled coffee with a hint of vanilla.", category: "Beverages", image: "/images/bev2.png" },
+  { name: "Herbal Tea", price: "$3", description: "A soothing blend of herbal tea.", category: "Beverages", image: "/images/bev3.png" },
 ];
 
 const MenuSection: FC<{ items: MenuItemProps[] }> = ({ items }) => {  
@@ -39,11 +42,15 @@ const MenuSection: FC<{ items: MenuItemProps[] }> = ({ items }) => {
 
   return (  
     <div className="mb-12">  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-        {displayedItems.map((item, index) => (  
-          <MenuItem key={index} name={item.name} price={item.price} description={item.description} image={item.image} />  
-        ))}  
-      </div>  
+      {displayedItems.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
+          {displayedItems.map((item, index) => (  
+            <MenuItem key={index} name={item.name} price={item.price} description={item.description} image={item.image} category={''} />  
+          ))}  
+        </div>  
+      ) : (
+        <p className="text-center text-gray-500 mt-4">No items available in this category.</p>
+      )}
       {!showAll && items.length > 3 ? (
         <div className="text-center mt-4">
           <button
@@ -54,14 +61,16 @@ const MenuSection: FC<{ items: MenuItemProps[] }> = ({ items }) => {
           </button>
         </div>
       ) : (
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setShowAll(false)}
-            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition duration-300"
-          >
-            View Less
-          </button>
-        </div>
+        items.length > 3 && (
+          <div className="text-center mt-4">
+            <button
+              onClick={() => setShowAll(false)}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition duration-300"
+            >
+              View Less
+            </button>
+          </div>
+        )
       )}
     </div>  
   );  
@@ -106,4 +115,4 @@ const MenuBody: FC = () => {
 };
 
 // Export MenuBody as a named export
-export { MenuBody };
+export default MenuBody;
