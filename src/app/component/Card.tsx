@@ -1,4 +1,6 @@
-export default function AboutSection() {
+import React from 'react';
+
+const AboutSection: React.FC = () => {
   return (
     <main className="p-8 bg-gray-100">
       <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -43,3 +45,5 @@ export default function AboutSection() {
     </main>
   );
 }
+
+export default AboutSection;

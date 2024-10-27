@@ -1,6 +1,5 @@
 // pages/contact.js
-import Link from 'next/link';
-import Footer from '../component/Footer';
+
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
