@@ -5,11 +5,11 @@ const AboutSection: React.FC = () => {
     <main className="p-8 bg-gray-100">
       <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-[#222831] shadow-lg p-6 rounded-lg flex transition-transform transform hover:scale-105">
-          <img 
+          {/* <img 
             src="/images/o1.jpg" 
             alt="Our Story" 
             className="w-24 h-24 rounded-full mr-4 object-cover border-4 border-blue-500" 
-          />
+          /> */}
           <div className="flex flex-col justify-between">
             <div>
               <h3 className="text-xl font-semibold text-white">Tasty Thursdays</h3>
@@ -24,11 +24,11 @@ const AboutSection: React.FC = () => {
         </div>
 
         <div className="bg-[#222831] shadow-lg p-6 rounded-lg flex transition-transform transform hover:scale-105">
-          <img 
+          {/* <img 
             src="/images/o2.jpg" 
             alt="Our Ingredients" 
             className="w-24 h-24 rounded-full mr-4 object-cover border-4 border-blue-500" 
-          />
+          /> */}
           <div className="flex flex-col justify-between">
             <div>
               <h3 className="text-xl font-semibold text-white">Pizza Days</h3>
